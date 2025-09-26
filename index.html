@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Card Listings</title>
+  <style>
+    body {
+      background: #000;
+      color: #ddd;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .title {
+      color: #a855f7;
+      text-align: center;
+      margin: 0 0 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #0a0a0a;
+      box-shadow: 0 0 15px rgba(168,85,247,0.2);
+      border: 1px solid #1e1e1e;
+    }
+    thead {
+      background: #111;
+    }
+    th, td {
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #222;
+      white-space: nowrap;
+    }
+    th {
+      color: #c084fc;
+      font-weight: 600;
+      border-bottom: 2px solid #2c2c2c;
+    }
+    tbody tr:nth-child(odd) { background: #0f0f0f; }
+    tbody tr:nth-child(even) { background: #141414; }
+    tbody tr:hover { background: #1d1d1d; }
+    .buy-btn {
+      background: #a855f7;
+      border: 1px solid #9333ea;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+    .buy-btn:hover {
+      background: #9333ea;
+      border-color: #7e22ce;
+    }
+
+    /* Discord button */
+    .discord-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.2s ease;
+    }
+    .discord-btn img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+    .discord-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Discord button -->
+  <a href="https://discord.gg/fN8vaqfX7W" target="_blank" class="discord-btn">
+    <img src="https://imgs.search.brave.com/Ra78UwBGoUUofr-1S2HIeMKxvFJj3gfypeaynC-AWmk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJlLzg3/L2VmLzJlODdlZjcw/MWU0MmI4YzM5ZjIx/NGY5ZDgwNDU0NGMw/LmpwZw" alt="Discord">
+  </a>
+
+  <h1 class="title">Myria Market</h1>
+
+  <table id="card-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>BIN</th>
+        <th>Exp Date</th>
+        <th>Category</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Zip</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const cards = [
+      { type: "Visa", bin: "412345", exp: "12/25", category: "High Balance", country: "Canada", state: "ON", city: "Toronto", zip: "M5V 2T6" },
+      { type: "MasterCard", bin: "542015", exp: "09/26", category: "High Balance", country: "Mexico", state: "CDMX", city: "Ciudad de México", zip: "02240" },
+      { type: "Amex", bin: "372448", exp: "12/27", category: "High Balance", country: "United States", state: "ME", city: "Portland", zip: "04101" },
+      { type: "Visa", bin: "453201", exp: "03/26", category: "High Balance", country: "Germany", state: "Berlin", city: "Berlin", zip: "10115" },
+      { type: "MasterCard", bin: "556043", exp: "06/27", category: "High Balance", country: "United States", state: "NY", city: "Schenectady", zip: "12305" },
+      { type: "Amex", bin: "345678", exp: "11/25", category: "High Balance", country: "Australia", state: "NSW", city: "Sydney", zip: "2000" },
+      { type: "Visa", bin: "491603", exp: "08/26", category: "High Balance", country: "France", state: "Île-de-France", city: "Paris", zip: "75001" },
+      { type: "MasterCard", bin: "510510", exp: "05/27", category: "High Balance", country: "Japan", state: "Tokyo", city: "Tokyo", zip: "100-0001" },
+      { type: "Visa", bin: "401288", exp: "07/26", category: "High Balance", country: "United Kingdom", state: "England", city: "London", zip: "SW1A 1AA" },
+      { type: "Amex", bin: "378282", exp: "04/27", category: "High Balance", country: "South Korea", state: "Seoul", city: "Seoul", zip: "04518" },
+      { type: "MasterCard", bin: "530999", exp: "10/26", category: "High Balance", country: "Brazil", state: "São Paulo", city: "São Paulo", zip: "01000-000" },
+      { type: "Visa", bin: "456789", exp: "02/27", category: "High Balance", country: "Italy", state: "Lazio", city: "Rome", zip: "00100" },
+      { type: "Amex", bin: "371449", exp: "09/26", category: "High Balance", country: "Spain", state: "Madrid", city: "Madrid", zip: "28001" },
+      { type: "MasterCard", bin: "520000", exp: "01/27", category: "High Balance", country: "Russia", state: "Moscow", city: "Moscow", zip: "101000" },
+      { type: "Visa", bin: "412345", exp: "12/25", category: "High Balance", country: "Canada", state: "ON", city: "Toronto", zip: "M5V 2T6" },
+      { type: "MasterCard", bin: "542015", exp: "09/26", category: "High Balance", country: "Mexico", state: "CDMX", city: "Ciudad de México", zip: "02240" },
+      { type: "Amex", bin: "372448", exp: "12/27", category: "High Balance", country: "United States", state: "ME", city: "Portland", zip: "04101" },
+      { type: "Visa", bin: "453201", exp: "03/26", category: "High Balance", country: "Germany", state: "Berlin", city: "Berlin", zip: "10115" },
+      { type: "MasterCard", bin: "556043", exp: "06/27", category: "High Balance", country: "United States", state: "NY", city: "Schenectady", zip: "12305" },
+      { type: "Amex", bin: "345678", exp: "11/25", category: "High Balance", country: "Australia", state: "NSW", city: "Sydney", zip: "2000" },
+      { type: "Visa", bin: "491603", exp: "08/26", category: "High Balance", country: "France", state: "Île-de-France", city: "Paris", zip: "75001" },
+      { type: "MasterCard", bin: "510510", exp: "05/27", category: "High Balance", country: "Japan", state: "Tokyo", city: "Tokyo", zip: "100-0001" },
+      { type: "Visa", bin: "401288", exp: "07/26", category: "High Balance", country: "United Kingdom", state: "England", city: "London", zip: "SW1A 1AA" },
+      { type: "Amex", bin: "378282", exp: "04/27", category: "High Balance", country: "South Korea", state: "Seoul", city: "Seoul", zip: "04518" },
+      { type: "MasterCard", bin: "530999", exp: "10/26", category: "High Balance", country: "Brazil", state: "São Paulo", city: "São Paulo", zip: "01000-000" },
+      { type: "Visa", bin: "456789", exp: "02/27", category: "High Balance", country: "Italy", state: "Lazio", city: "Rome", zip: "00100" },
+      { type: "Amex", bin: "371449", exp: "09/26", category: "High Balance", country: "Spain", state: "Madrid", city: "Madrid", zip: "28001" },
+      { type: "MasterCard", bin: "520000", exp: "01/27", category: "High Balance", country: "Russia", state: "Moscow", city: "Moscow", zip: "101000" },
+      { type: "Visa", bin: "412345", exp: "12/25", category: "High Balance", country: "Canada", state: "ON", city: "Toronto", zip: "M5V 2T6" },
+      { type: "MasterCard", bin: "542015", exp: "09/26", category: "High Balance", country: "Mexico", state: "CDMX", city: "Ciudad de México", zip: "02240" },
+      { type: "Amex", bin: "372448", exp: "12/27", category: "High Balance", country: "United States", state: "ME", city: "Portland", zip: "04101" },
+      { type: "Visa", bin: "453201", exp: "03/26", category: "High Balance", country: "Germany", state: "Berlin", city: "Berlin", zip: "10115" },
+      { type: "MasterCard", bin: "556043", exp: "06/27", category: "High Balance", country: "United States", state: "NY", city: "Schenectady", zip: "12305" },
+      { type: "Amex", bin: "345678", exp: "11/25", category: "High Balance", country: "Australia", state: "NSW", city: "Sydney", zip: "2000" },
+      { type: "Visa", bin: "491603", exp: "08/26", category: "High Balance", country: "France", state: "Île-de-France", city: "Paris", zip: "75001" },
+      { type: "MasterCard", bin: "510510", exp: "05/27", category: "High Balance", country: "Japan", state: "Tokyo", city: "Tokyo", zip: "100-0001" },
+      { type: "Visa", bin: "401288", exp: "07/26", category: "High Balance", country: "United Kingdom", state: "England", city: "London", zip: "SW1A 1AA" },
+      { type: "Amex", bin: "378282", exp: "04/27", category: "High Balance", country: "South Korea", state: "Seoul", city: "Seoul", zip: "04518" },
+      { type: "MasterCard", bin: "530999", exp: "10/26", category: "High Balance", country: "Brazil", state: "São Paulo", city: "São Paulo", zip: "01000-000" },
+      { type: "Visa", bin: "456789", exp: "02/27", category: "High Balance", country: "Italy", state: "Lazio", city: "Rome", zip: "00100" },
+      { type: "Amex", bin: "371449", exp: "09/26", category: "High Balance", country: "Spain", state: "Madrid", city: "Madrid", zip: "28001" },
+      { type: "MasterCard", bin: "520000", exp: "01/27", category: "High Balance", country: "Russia", state: "Moscow", city: "Moscow", zip: "101000" }
+    ];
+    const tbody = document.querySelector("#card-table tbody");
+    cards.forEach(c => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${c.type}</td>
+        <td>${c.bin}</td>
+        <td>${c.exp}</td>
+        <td>${c.category}</td>
+        <td>${c.country}</td>
+        <td>${c.state}</td>
+        <td>${c.city}</td>
+        <td>${c.zip}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
